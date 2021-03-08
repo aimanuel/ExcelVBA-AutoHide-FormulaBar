@@ -1,0 +1,100 @@
+'++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+'English
+'It's used as a compliment of your automation during finalization or lock before user used it
+'the platform will look clean, neat, proffessional looks (like an apps)
+'in this module, there'll be 2 macros :
+' 1. Hide : to hide Headings, Gridlines, and formulabar
+' 2. Unhide : to unhide Headings, Gridlines, and formulabar
+
+'Indonesia
+'Macro ini digunakan untuk kombinasi/pelengkap lock/protect workbook, sehingga userform tampak lebih luas
+'sehingga user tidak perlu/minim scrolling, tampilan akan lebih profesional & tampak seperti aplikasi
+'macro ini ada 2, HideIt : untuk meng-hide, ShowIt : untuk meng-show-kan
+' 1. Hide : untuk menyembunyikan Headings, Gridlines, and formulabar
+' 2. Unhide : untuk menampilkan Headings, Gridlines, and formulabar
+'++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Sub HideIt()
+
+Dim wbBook As Workbook
+Dim wsSheet As Worksheet
+
+Set wbBook = ThisWorkbook
+
+Application.ScreenUpdating = False
+
+For Each wsSheet In wbBook.Worksheets
+    wsSheet.Activate
+    
+    'to hide headings
+    '-----------------------------------------
+    ActiveWindow.DisplayHeadings = False
+    
+    'to hide gridlines
+    '-----------------------------------------
+    ActiveWindow.DisplayGridlines = False
+
+    
+    'to hide formula bar
+    '-----------------------------------------
+    Application.DisplayFormulaBar = False
+Next wsSheet
+
+
+'to hide sheets tabs
+'-----------------------------------------
+ActiveWindow.DisplayWorkbookTabs = False
+
+
+'to hide ribbon
+'-----------------------------------------
+Application.ExecuteExcel4Macro "show.toolbar(""Ribbon"", False)"
+
+
+Worksheets("Sheet2").Activate
+
+Application.ScreenUpdating = True
+
+
+End Sub
+
+Sub ShowIt()
+
+Dim wbBook As Workbook
+Dim wsSheet As Worksheet
+
+Set wbBook = ThisWorkbook
+
+Application.ScreenUpdating = False
+
+For Each wsSheet In wbBook.Worksheets
+    wsSheet.Activate
+    
+    'to show headings
+    '-----------------------------------------
+    ActiveWindow.DisplayHeadings = True
+
+    'to show gridlines
+    '-----------------------------------------
+    ActiveWindow.DisplayGridlines = True
+    
+    'to show formulabar
+    '-----------------------------------------
+    Application.DisplayFormulaBar = True
+Next wsSheet
+
+'to show sheets tabs
+'-----------------------------------------
+ActiveWindow.DisplayWorkbookTabs = True
+
+'to show ribbon
+'-----------------------------------------
+Application.ExecuteExcel4Macro "show.toolbar(""Ribbon"", True)"
+
+
+Worksheets("Sheet2").Activate
+
+Application.ScreenUpdating = True
+
+
+End Sub
